@@ -1,0 +1,97 @@
+<ion-content class="background">
+  <div id="map-home" class="full"></div>
+  
+  <ion-list *ngIf="listOrders">
+    <ion-card class="background-card" *ngFor="let order of orders; let k = index">
+      <ion-card-content>
+        <!--ORDER NAME-->
+        <p class="title-card">
+          <ion-icon color="ee" *ngIf="order.startPhoto" (tap)="viewPhoto(order.startPhoto)" ios="ios-camera-outline" md="md-camera"></ion-icon>
+          {{order.PackageName | uppercase}}
+        </p>
+        <!--DETAILS  -->
+        <p class="detail-text" *ngIf="order.description">
+          <i>Detalle: {{order.description}}</i>
+        </p>
+        
+        <!--FROM TO-->
+        <div class="row">
+          <div class="col source-text">
+            {{order.source.split(',')[0] | uppercase}}
+          </div>
+          <div class="col">
+              <ion-icon class="icon-address" name="arrow-round-forward"></ion-icon>
+          </div>
+          <div class="col destination-text">
+            {{order.destination.split(',')[0] | uppercase}}
+          </div>
+        </div>
+
+        <!-- DAY-->
+        <ion-item class="background-card">
+          <p class="subtitle-card">
+            DIA
+          </p>  
+          <ion-badge color="light" item-end> {{order.maxDeliveryDate | date}}</ion-badge>
+        </ion-item>
+        <!--HOUR-->
+        <ion-item class="background-card">
+          <p class="subtitle-card">
+            HORA
+          </p>  
+            <ion-badge color="light" item-end> POR LA {{order.mommentPickup | uppercase}}</ion-badge>
+        </ion-item>
+        <!--TRANSPORT-->
+        <ion-item class="background-card">
+          <p class="subtitle-card">
+            TRANSPORTE
+          </p>  
+          <ion-badge color="light" item-end> {{order.vehicle | uppercase}} </ion-badge>
+        </ion-item>
+        <ion-item class="background-card">
+          <button item-end ion-button outline icon-start color="ee" *ngIf="order.is_client == 1"  (tap)="presentDeliveryClientConfirm(order)">
+            <ion-icon name="locate"></ion-icon>
+            LLEVAR PEDIDO
+          </button>
+          <button item-end ion-button outline icon-start color="ee" *ngIf="order.is_client !== 1"  (tap)="presentDeliveryConfirm(order)">
+            <ion-icon name="locate"></ion-icon>
+            HACER OFERTA
+          </button>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </ion-list> 
+
+</ion-content>
+
+<ion-footer>
+  <ion-fab class="ion-fab-left" *ngIf="!listOrders">
+    <button ion-fab class="button-home">
+      <ion-icon name="more"></ion-icon>
+    </button>
+    <ion-fab-list side="top">
+      <button ion-fab class="button-home" *ngIf="orders.length > 0" (click)="showOrders(true)">
+        <ion-icon name="list"></ion-icon>
+      </button>
+        <button ion-fab class="button-home" (tap)="alertAction('delivery')">
+          <ion-icon name="bicycle"></ion-icon>
+        </button>
+        <button ion-fab class="button-home" (tap)="alertAction('order')">
+          <ion-icon name="cube"></ion-icon>
+        </button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <ion-fab class="ion-fab-left" *ngIf="listOrders">
+    <button ion-fab class="button-home" (tap)="showOrders(false)">
+      <ion-icon name="pin"></ion-icon>
+    </button>
+  </ion-fab>
+
+  <ion-fab class="ion-fab-right"> 
+    <button ion-fab class="button-home" (tap)="showOrders(false)">
+      <ion-icon name="refresh"></ion-icon>
+    </button>
+  </ion-fab>
+  
+</ion-footer>

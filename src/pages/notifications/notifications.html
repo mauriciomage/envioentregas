@@ -1,0 +1,76 @@
+<!--
+  Generated template for the NotificationsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="ee">
+    <ion-title>{{title}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="background">
+	<ion-card class="background-card">
+		<ion-card-header class="background-card">
+			Configuración de Notificaciones
+		</ion-card-header>
+		
+		<ion-card-content>
+			<h2 class="color-header-body">
+				Configura todas los tipos notificaciones que vas
+				a recibir, una vez que haya EnvioEntregas disponibles. Recuerda 
+				que puedes configurarlas cuando lo desees.
+			</h2> 
+		</ion-card-content>
+	</ion-card>
+
+	<ion-list-header color="dark">
+		    <p><ion-icon name="notifications-outline"></ion-icon> &nbsp;Notificaciones Push </p>
+	</ion-list-header>
+	
+		<ion-list color="dark">
+
+		  <ion-item color="dark">
+		    <ion-label>Nuevos Mensajes</ion-label>
+			    <ion-toggle [(ngModel)]="messagesNotif"></ion-toggle>
+		  </ion-item>
+		  <ion-item color="dark">
+		    <ion-label>Oferta/Interacciones</ion-label>
+			    <ion-toggle  [(ngModel)]="offertNotif"></ion-toggle>
+		  </ion-item>
+		  <ion-item color="dark">
+		    <ion-label>Posibles Deliveries</ion-label>
+			    <ion-toggle  [(ngModel)]="deliveriesNotif"></ion-toggle>
+		  </ion-item>
+
+		</ion-list>
+
+		<ion-list-header color="dark">
+			<p><ion-icon name="notifications-outline"></ion-icon> &nbsp;Notificaciones por Email </p>
+
+			<ion-list color="dark">
+
+				<ion-item color="dark">
+					<ion-label>Nuevos Mensajes</ion-label>
+						<ion-toggle [(ngModel)]="messagesEmail"></ion-toggle>
+				</ion-item>
+				<ion-item color="dark">
+					<ion-label>Oferta/Interacciones</ion-label>
+						<ion-toggle  [(ngModel)]="offertEmail"></ion-toggle>
+				</ion-item>
+				<ion-item color="dark">
+					<ion-label>Posibles Deliveries</ion-label>
+						<ion-toggle  [(ngModel)]="deliveriesEmail"></ion-toggle>
+				</ion-item>
+	
+			</ion-list>
+		</ion-list-header>
+	
+</ion-content>
+		<ion-footer>
+			<button ion-button full (click)="presentNotificationPrompt();" color="ee">Guardar</button>
+		</ion-footer>

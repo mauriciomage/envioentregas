@@ -1,0 +1,53 @@
+<ion-header>
+
+  <ion-navbar color="ee">
+  	 <button start (click)="goBack();" id="go-back-go-order" style="display:none" class="button-back">
+		<ion-icon name="arrow-back" class="icon-back" > Volver</ion-icon>
+  	 </button>
+  	<ion-title>{{title | uppercase}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content class="background">
+		  <ion-list-header>
+		    Indica tu disponibilidad semanal.
+		  </ion-list-header>
+
+		  
+	      	<hr>
+	      	<hr>
+			<ion-item-group *ngFor="let day of days" color="dark">
+					
+			  <ion-item-divider color="ee">
+			   Día {{day.day | uppercase}}
+			  </ion-item-divider>
+			  	<ion-item>
+				  	<ion-label>Desde la Hora: </ion-label>
+					<ion-datetime displayFormat="HH:mm" [(ngModel)]="day.startHour"></ion-datetime>
+				</ion-item>
+			  
+				<ion-item>
+				   <ion-label>Hasta la Hora:  </ion-label>
+				   <ion-datetime displayFormat="HH:mm" [(ngModel)]="day.finishHour"></ion-datetime>  	
+				</ion-item>
+
+			</ion-item-group>
+
+
+		  	
+			<!--
+				<ion-footer>
+				<button class="bottom" ion-button full color="light" (click)="saveDeliveryCalendar(frmDeliveryCalendar);">
+					GUARDAR 
+				</button>
+				<button class="bottom" ion-button full color="ee" (click)="saveDeliveryCalendar(frmDeliveryCalendar);">
+					GUARDAR Y CARGAR OTRA CIUDAD
+				</button>
+				</ion-footer>
+
+			-->
+</ion-content>
+<ion-footer>
+	<button ion-button block color="dark" (click)="saveDeliveryCalendar();">GUARDAR</button>
+</ion-footer>

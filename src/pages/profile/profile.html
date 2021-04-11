@@ -1,0 +1,62 @@
+
+<ion-header>
+  <ion-navbar color="ee">
+    <ion-title>{{title}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="background">
+  <!-- DATA PROFILE -->
+  <ion-card>
+    <ion-card-header>
+      Tus Datos Principales
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list no-line>
+        <ion-item>
+          <ion-avatar item-start>
+            <ion-icon name="person-outline"></ion-icon>
+          </ion-avatar>
+          {{ fname | uppercase }} {{lname | uppercase }}
+        </ion-item>
+        <ion-item>
+          <ion-avatar item-start>
+            <ion-icon name="mail-outline"></ion-icon>
+          </ion-avatar>
+          {{email}}
+        </ion-item>
+        <ion-item>
+          <ion-avatar item-start>
+            <ion-icon name="call-outline"></ion-icon>
+          </ion-avatar>
+          {{phone}}
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>   
+
+  <!-- DATA ORDERS -->
+  <ion-card>
+    <ion-card-header>
+      Acerca de EnvioEntregas
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list no-line>
+        <ion-item>
+          EnvioEntregas Completadas <ion-badge color="ee" item-end>{{orders_completed}}</ion-badge>
+        </ion-item>
+        <ion-item>
+          EnvioEntregas Canceladas <ion-badge color="ee" item-end>{{orders_cancelled}}</ion-badge>
+        </ion-item>
+        <ion-item>
+          Pedidos Solicitados <ion-badge color="ee" item-end>{{orders}}</ion-badge>
+        </ion-item>
+        <ion-item>
+          Pedidos Entregados <ion-badge color="ee" item-end>{{orders_delivered}}</ion-badge>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+    
+  <!-- KILL SESSION BUTTON--> 
+  <p (click)="presentKillSession();" style="color:#26a69a"> CERRAR SESIÓN </p>
+</ion-content>

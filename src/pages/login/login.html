@@ -1,0 +1,117 @@
+<!--  NOT LOGGED -->
+<ion-content class="background" *ngIf="!logged">
+	<form #frmSignup="ngForm" class="login-form">
+		<ion-card>
+		  <ion-card-header>
+		    Ingresar a EnvioEntregas
+		  </ion-card-header>
+
+		  <ion-card-content>
+		    <ion-list no-line>
+			    <ion-item>
+			    	<ion-input type="text" name="email" placeholder="Ingresa tu email" ngModel #email = "ngModel"></ion-input>
+			    </ion-item>
+			    <ion-item>
+			    	<ion-input type="password" name="password" placeholder="Contraseña" ngModel #password = "ngModel"></ion-input>
+			    </ion-item>
+				</ion-list>
+		    <a href="https://envioentregas.com/password/reset">Olvidaste tu cuenta? <b>Obten ayuda para ingresar</b></a>
+				<br><br>
+		    <button ion-button block outline color="light" (click)='sendDataLogin(frmSignup);'>
+		    	Ingresar
+		    </button>
+		  	<button ion-button block color="facebook" (click)='loginWithFB()'>
+		  		<ion-icon name="logo-facebook"></ion-icon> &nbsp; Ingresar con Facebook
+		  	</button>
+
+		  </ion-card-content>
+			<button class="bottom" ion-button clear full color="light" [navPush]="SigninPage">
+				No tienes cuenta? Registrate
+			</button>
+		</ion-card>
+	</form>
+</ion-content>
+<!--  USER PROFILE CARD -->
+<ion-content class="background" *ngIf="logged">
+	<ion-card>
+		<ion-card-header *ngIf="photo || photo_fb">
+		  <ion-thumbnail>
+				<div *ngIf="photo && !photo_fb">
+					<img src="https://envioentregas.com/storage/app/public/users/{{photo}}" *ngIf="!hasChangeProfilePhoto">
+					<img  [src]="base64Image" *ngIf="hasChangeProfilePhoto">	
+				</div>
+				<div *ngIf="photo_fb">
+					<img src="{{photo_fb}}">
+				</div>
+			</ion-thumbnail>
+		</ion-card-header>		
+		<ion-card-content>
+			<button ion-button block outline color="light" (click)='presentChangeProfilePhoto()' *ngIf="!hasChangeProfilePhoto">
+				ELEGIR FOTO DE PERFIL
+			</button>
+			<button ion-button block color="ee" *ngIf="hasChangeProfilePhoto" (click)='saveChangeProfilePhoto()'>
+				GUARDAR FOTO DE PERFIL
+			</button>
+			<p *ngIf="!isClient">Haz un sueldo extra</p>
+		    <button ion-button block  color="light" *ngIf="!isClient && !isDeliveryRegistered()" (click)="goPage('scheduler');">
+		    	SER DELIVERY
+			</button>
+			<button ion-button block color="ee" *ngIf="isClient" (click)="goPage('places');">
+		    	MIS SUCURSALES
+		  </button>
+			<button ion-button block  color="light" *ngIf="isDeliveryRegistered()" (click)="goPage('scheduler');">
+				VER MI DISPONIBILIDAD DELIVERY
+			</button>
+		</ion-card-content>
+	</ion-card>	  
+			
+	<ion-card>
+		<ion-card-header>
+			<button ion-button block outline color="light" (click)='toProfilePage();'>
+				IR A MI PERFIL
+			</button>
+		</ion-card-header>	
+		<ion-card-content>
+			<ion-list no-line>
+				<ion-item (click)='toProfilePage();'>
+					<ion-avatar item-start>
+						<ion-icon name="list-box"></ion-icon>
+					</ion-avatar>
+					Recuerda tu Info
+				</ion-item>
+				<ion-item [navPush]="pushPage">
+					<ion-avatar item-start>
+						<ion-icon name="notifications-outline"></ion-icon>
+					</ion-avatar>
+					Notificaciones
+				</ion-item>
+				<ion-item>
+					<ion-avatar item-start>
+						<ion-icon name="star"></ion-icon>
+					</ion-avatar>
+
+					<span *ngIf="rating > 0">Mi Reputación</span> 
+					<span *ngIf="!rating || rating === 'null'">No ha sido calificado</span>
+					<ion-icon *ngIf="rating >= 1" class="ee-icon" name="star"></ion-icon>
+					<ion-icon *ngIf="rating > 0 && rating < 1" class="ee-icon" name="star-half"></ion-icon>
+
+					<ion-icon *ngIf="rating >= 2" class="ee-icon" name="star"></ion-icon>
+					<ion-icon *ngIf="rating > 1 && rating < 2" class="ee-icon" name="star-half"></ion-icon>
+					<ion-icon *ngIf="rating <= 1 && rating > 0" class="ee-icon" name="star-outline"></ion-icon>
+
+					<ion-icon *ngIf="rating >= 3" class="ee-icon" name="star"></ion-icon>
+					<ion-icon *ngIf="rating > 2 && rating < 3" class="ee-icon" name="star-half"></ion-icon>
+					<ion-icon *ngIf="rating <= 2 && rating > 0" class="ee-icon" name="star-outline"></ion-icon>
+
+					<ion-icon *ngIf="rating >= 4" class="ee-icon" name="star"></ion-icon>
+					<ion-icon *ngIf="rating > 3 && rating < 4" class="ee-icon" name="star-half"></ion-icon>
+					<ion-icon *ngIf="rating <= 3 && rating > 0" class="ee-icon" name="star-outline"></ion-icon>
+
+					<ion-icon *ngIf="rating == 5" class="ee-icon" name="star"></ion-icon>
+					<ion-icon *ngIf="rating > 4 && rating < 5" class="ee-icon" name="star-half"></ion-icon>
+					<ion-icon *ngIf="rating <= 4 && rating > 0" class="ee-icon" name="star-outline"></ion-icon>
+				</ion-item>
+			</ion-list>
+		</ion-card-content>
+	</ion-card>
+</ion-content>

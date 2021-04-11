@@ -1,0 +1,27 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{title}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="card-background-page">
+
+  <ion-card>
+    <img src="../assets/imgs/order.jpg"/>
+    <div class="card-title">¿ Necesitas Enviar un Paquete?</div>
+    <div align="right" class="card-subtitle"><button ion-button color="danger" [navPush]="pushPageOrder" class="button-ee" round>Cargar Pedido</button></div>
+  </ion-card>
+
+  <ion-card>
+    <img src="../assets/imgs/delivery2.jpg"/>
+    <div class="card-title">¿ Deseas llevar un Pedido y hacer dinero extra ?</div>
+    <div align="right" class="card-subtitle"><button ion-button color="danger" [navPush]="pushPageSearch" class="button-ee" round>Busca Pedidos</button></div>
+  </ion-card>
+
+  <button ion-button full class="button-ee" (click)='sendDataLogin(frmSignup);'>CONSULTANOS</button>
+
+</ion-content>

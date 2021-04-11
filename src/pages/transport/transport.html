@@ -1,0 +1,62 @@
+<ion-header>
+
+  <ion-navbar color="ee">
+    <ion-title>{{title}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="background">
+	<p class="normal_text">¿Cuál sería el Transporte adecuado?</p>
+	<form #f2="ngForm">
+		<ion-card>
+		  	<ion-card-header>
+				<ion-input  type="number" maxlength="10" placeholder="Indicar peso en gramos" name="weight" ngModel #weight #uppercase = "ngModel" ></ion-input>
+    		</ion-card-header>	
+	  
+	  		<ion-card-content>
+		    		<p class="text-ee">SELECCIONE EL TRANSPORTE</p>
+				  <ion-list radio-group name="vehicle" ngModel #vehicle = "ngModel">
+				  	<ion-item class="item-group">
+				  		<ion-label class="text-ee">CAMINANDO <br><p ><i class="subtext-ee">Celular, llaves, lentes etc.</i></p></ion-label>
+				  		<ion-radio  name="caminando" value="caminando" color="ee" ngModel #vehicle = "ngModel" ngDefaultControl></ion-radio>
+				  	</ion-item>
+
+				  	<ion-item>
+				  		<ion-label class="text-ee">BICICLETA <br><p ><i class="subtext-ee">Notebook, libro, ropa etc.</i></p></ion-label>
+				  		<ion-radio  name="bicicleta" value="bicicleta" color="ee" ngModel #vehicle = "ngModel" ngDefaultControl></ion-radio>	
+				  	</ion-item>
+
+				  	<ion-item>
+				  		<ion-label class="text-ee">AUTO <p ><i class="subtext-ee">Cuadro, guitarra, mascota etc.</i></p></ion-label>
+				  		<ion-radio name="auto"   value="auto" color="ee" ngModel #vehicle = "ngModel" ngDefaultControl></ion-radio>
+						</ion-item>
+ 
+				  	<ion-item>
+				  		<ion-label class="text-ee">COLECTIVO <br><p ><i class="subtext-ee">Mochila, libro, herramientas etc.</i></p></ion-label>
+				  		<ion-radio name="colectivo" value="colectivo" color="ee"  ngModel #vehicle = "ngModel" ngDefaultControl></ion-radio>
+				  	</ion-item>
+
+				  	<ion-item>
+				  		<ion-label class="text-ee">CAMIONETA / FURGON <p><i class="subtext-ee">Mueble, bicicleta etc.</i></p></ion-label>
+				  		<ion-radio name="furgon" value="furgon" color="ee"  ngModel #vehicle = "ngModel" ngDefaultControl></ion-radio>
+				  	</ion-item>
+	
+				</ion-list>
+	
+			</ion-card-content>	
+		
+		</ion-card>	
+	
+	</form> 
+
+</ion-content>
+
+<ion-footer>
+	
+	<ion-fab>
+		<button ion-fab class="button-ee-fav" (click)='sendDataStep2(f2);'><ion-icon name="arrow-forward"></ion-icon></button>
+	</ion-fab>
+	
+</ion-footer>

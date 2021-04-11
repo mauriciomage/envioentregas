@@ -1,0 +1,41 @@
+<ion-header>
+
+  <ion-navbar color="ee">
+  	 <ion-title>{{title | uppercase}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content class="background">
+	<ion-card class="background-card">
+		<ion-card-header class="background-card">
+			¿ Como funciona ?
+		</ion-card-header>
+		<ion-card-content>
+			<h2 class="color-header-body">
+				Cuando cargues Pedidos, podras seleccionar a cual de ellas
+					debera pasar el Delivery a retirar el Pedido.
+			</h2> 
+		</ion-card-content>
+	</ion-card>
+	<ion-list color="dark">
+		<ion-list-header color="dark">
+			Desliza a la izquierda para Eliminar
+		</ion-list-header>
+		<ion-item-sliding *ngFor="let place of places; let k = index"> 
+			<ion-item item-start color="dark"> 
+				<h4><b>{{place.address | uppercase}}</b></h4>
+			</ion-item>
+			<ion-item-options ion-end>
+				<button ion-button expandable color="danger" (click)="deleteAddress(place.id)">
+					<ion-icon name="trash"></ion-icon>
+				</button>
+			</ion-item-options>
+		</ion-item-sliding>
+	</ion-list>
+</ion-content>
+<ion-footer>
+	<button class="bottom" ion-button full color="ee" (click)="addNew();">
+		AGREGAR SUCURSAL
+	</button>
+</ion-footer>

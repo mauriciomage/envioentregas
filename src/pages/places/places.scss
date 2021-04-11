@@ -1,0 +1,31 @@
+page-places{
+  .background{
+		background-color: map-get($colors, dark);
+  }
+  .background-card {
+    background-color: map-get($colors, dark);
+    color: #FAC82C;
+    size: 20px;
+    text-align: center;
+  }
+  .position-card {
+    position: relative;
+    margin-top: 2cm;
+    font-weight: bold;
+  }
+  .color-header-body {
+    color: white;
+  }
+  .center {
+    text-align: center;
+    align-content: center;
+  }
+  .text-date {
+    color: #B5B2AA;
+    font-size: 12px;
+  }
+  ion-icon {
+    text-align: center;
+    align-content: center;
+  }
+}

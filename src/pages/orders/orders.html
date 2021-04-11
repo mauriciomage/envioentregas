@@ -1,0 +1,259 @@
+
+<ion-header>
+
+  <ion-navbar color="ee" hideBackButton>
+    <ion-title>{{title}}</ion-title>
+  </ion-navbar>
+
+  <ion-toolbar color="ee" *ngIf="logged"  [(ngModel)]="actions">
+    <ion-segment color="light">
+      <ion-segment-button value="send">
+        SOLICITADOS
+      </ion-segment-button>
+      <ion-segment-button value="delivery">
+        SOY DELIVERY
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="background">
+	<div padding  *ngIf="!logged" >
+		<ion-avatar item-start>
+			<div align="center">
+				<img src="assets/imgs/user_default.png" height="200px">
+			</div>
+		</ion-avatar>
+	
+
+		<button ion-button block color="ee" (tap)="goLogin();">INGRESAR</button>
+
+    <button ion-button block color="facebook" (tap)='loginWithFB()'>
+      <ion-icon name="logo-facebook"></ion-icon> &nbsp; Ingresar con Facebook
+    </button>
+    <ion-footer>
+
+        <button class="bottom" ion-button clear full color="light" [navPush]="SigninPage">
+  				    No tienes cuenta? Registrate
+  			</button>
+
+    </ion-footer>
+	</div>
+
+    <div [ngSwitch]="actions"  *ngIf="logged">
+
+        <ion-list *ngSwitchCase="'send'">
+
+              <ion-card  class="background-card" *ngIf="orders.length == 0">
+                
+                <img src="assets/imgs/empty_orders.jpg"/>
+                <button ion-button color="dark" [navPush]="newOrderPage">¿Quieres Enviar algo?</button>
+              
+              </ion-card>
+
+
+            <ion-card class="background-card" *ngFor="let order of orders; let k = index">
+              <ion-card-content>
+                <!--ORDER NAME-->
+                <p class="title-card">
+                  <ion-icon color="ee" *ngIf="order.startPhoto" (tap)="viewPhoto(order)" ios="ios-camera-outline" md="md-camera"></ion-icon>
+                  {{order.name | uppercase}}
+                </p>
+                <!--DETAILS  -->
+                <p class="detail-text" *ngIf="order.description">
+                  <i>Detalle: {{order.description}}</i>
+                </p>
+                <!--CODES-->
+                <div *ngIf="order.status_order == 'aceptada'">
+                  <p class="text-code"> CODIGO ENVIO (toca para copiar)</p>
+                  <p class="detail-title-card">
+                    <ion-badge color="light" class="order-code" (click)="copy(order.startCode)" item-middle>{{order.startCode | uppercase}} </ion-badge>
+                  </p>
+                </div>
+                <div *ngIf="order.status_order == 'en proceso'">
+                  <p class="text-code"> CODIGO FINAL (toca para copiar)</p>
+                  <p class="detail-title-card" *ngIf="">
+                    <ion-badge color="light" class="order-code" (click)="copy(order.finishCode)" item-middle>{{order.finishCode | uppercase}}</ion-badge>
+                  </p>
+                </div>
+                <!--STATUS-->
+                <div class="status-container">
+                    <ion-icon name="options"></ion-icon> <label class="status-text">{{order.status_order | uppercase}}</label>
+                </div>
+                <!--FROM TO-->
+                <div class="row">
+                  <div class="col source-text">
+                    {{order.source.split(',')[0] | uppercase}}
+                  </div>
+                  <div class="col">
+                      <ion-icon class="icon-address" name="arrow-round-forward"></ion-icon>
+                  </div>
+                  <div class="col destination-text">
+                    {{order.destination.split(',')[0] | uppercase}}
+                  </div>
+                </div>
+                
+                <!-- DAY-->
+                <ion-item class="background-card">
+                  <p class="subtitle-card">
+                    DIA
+                  </p>  
+                  <ion-badge color="light" item-end> {{order.maxDeliveryDate | date}}</ion-badge>
+                </ion-item>
+                <!--HOUR-->
+                <ion-item class="background-card">
+                  <p class="subtitle-card">
+                    HORA
+                  </p>  
+                    <ion-badge color="light" item-end> POR LA {{order.mommentPickup | uppercase}}</ion-badge>
+                </ion-item>
+                <!--TRANSPORT-->
+                <ion-item class="background-card">
+                  <p class="subtitle-card">
+                    TRANSPORTE
+                  </p>  
+                  <ion-badge color="light" item-end> {{order.vehicle | uppercase}} </ion-badge>
+                </ion-item>
+                <!--BUTTON ACTIONS-->
+                <ion-item class="background-card"  *ngIf="order.status_order == 'en negociacion'">
+                  <button ion-button outline icon-start color="ee"  (tap)="goOrder(order.order_id, 'orders', 'offerts')">
+                    <ion-icon name="list"></ion-icon>
+                    OFERTAS
+                  </button>
+                </ion-item>
+  
+                <ion-item class="background-card"  *ngIf="order.status_order != 'cargada'">
+                  <button item-end ion-button outline icon-start color="ee"  (tap)="goOrder(order.order_id, 'orders', 'tracking', order.business_id)">
+                    <ion-icon name="locate"></ion-icon>
+                    SEGUIMIENTO
+                  </button>
+                </ion-item>
+                <!--COST-->
+                <ion-item class="background-card">
+                    <ion-badge color="ee" item-end> {{order.cost | currency:'ARS'}}</ion-badge>
+                </ion-item>
+              </ion-card-content>
+            </ion-card>
+       </ion-list> 
+
+
+       <ion-list *ngSwitchCase="'delivery'">
+
+              <ion-card class="background-card" *ngIf="delivery_orders.length == 0">
+                
+                <img src="assets/imgs/empty_orders.jpg"/>
+                <button ion-button color="dark" [navPush]="newDeliveryNotifyPage">¿Quieres Llevar algo?</button>
+              
+              </ion-card>
+
+            <ion-card class="background-card" *ngFor="let order of delivery_orders; let k = index">
+              <ion-card-content>
+                <!--ORDER NAME-->
+                <p class="title-card">
+                    <ion-icon color="ee" *ngIf="order.startPhoto" (tap)="viewPhoto(order)" ios="ios-camera-outline" md="md-camera"></ion-icon>
+                      {{order.name | uppercase}}
+                </p>
+                  <!--DETAILS  -->
+                  <p class="detail-text" *ngIf="order.description">
+                    <i>Detalle: {{order.description}}</i>
+                  </p>
+                  <p class="subtitle-delivery-card" color="ee">
+                    Por {{order.fname | uppercase}} {{order.lname | uppercase}}
+                  </p>
+                  <!--RATING DELIVERY-->
+                  <div col="col center">
+                    <ion-icon *ngIf="order.avg_point >= 1" color="ee" name="star"></ion-icon>
+                    <ion-icon *ngIf="order.avg_point > 0 && order.avg_point < 1" color="ee" name="star-half"></ion-icon>
+                    <ion-icon *ngIf="!order.avg_point" color="ee" name="star-outline"></ion-icon>
+
+                    <ion-icon *ngIf="order.avg_point >= 2" color="ee" name="star"></ion-icon>
+                    <ion-icon *ngIf="order.avg_point > 1 && order.avg_point < 2" color="ee" name="star-half"></ion-icon>
+                    <ion-icon *ngIf="order.avg_point <= 1" color="ee" name="star-outline"></ion-icon>
+
+                    <ion-icon *ngIf="order.avg_point >= 3" color="ee" name="star"></ion-icon>
+                    <ion-icon *ngIf="order.avg_point > 2 && order.avg_point < 3" color="ee" name="star-half"></ion-icon>
+                    <ion-icon *ngIf="order.avg_point <= 2" color="ee" name="star-outline"></ion-icon>
+
+                    <ion-icon *ngIf="order.avg_point >= 4" color="ee" name="star"></ion-icon>
+                    <ion-icon *ngIf="order.avg_point > 3 && order.avg_point < 4" color="ee" name="star-half"></ion-icon>
+                    <ion-icon *ngIf="order.avg_point <= 3" color="ee" name="star-outline"></ion-icon>
+
+                    <ion-icon *ngIf="order.avg_point == 5" color="ee" name="star"></ion-icon>
+                    <ion-icon *ngIf="order.avg_point > 4 && order.avg_point < 5" color="ee" name="star-half"></ion-icon>
+                    <ion-icon *ngIf="order.avg_point <= 4" color="ee" name="star-outline"></ion-icon>
+
+                  </div>
+                <!--STATUS-->
+                <div class="status-container">
+                  <ion-icon name="options"></ion-icon> <label class="status-text">{{order.status_order | uppercase}}</label>
+                </div>
+                <!--FROM TO-->
+                <div class="row">
+                  <div class="col source-text">
+                    {{order.source.split(',')[0] | uppercase}}
+                  </div>
+                  <div class="col">
+                      <ion-icon class="icon-address" name="arrow-round-forward"></ion-icon>
+                  </div>
+                  <div class="col destination-text">
+                    {{order.destination.split(',')[0] | uppercase}}
+                  </div>
+                </div>
+                
+                <!-- DAY-->
+                <ion-item class="background-card">
+                  <p class="subtitle-card">
+                    DIA
+                  </p>  
+                  <ion-badge color="light" item-end> {{order.maxDeliveryDate | date}}</ion-badge>
+                </ion-item>
+                <!--HOUR-->
+                <ion-item class="background-card">
+                  <p class="subtitle-card">
+                    HORA
+                  </p>  
+                    <ion-badge color="light" item-end> POR LA {{order.mommentPickup | uppercase}}</ion-badge>
+                </ion-item>
+                <!--TRANSPORT-->
+                <ion-item class="background-card">
+                  <p class="subtitle-card">
+                    TRANSPORTE
+                  </p>  
+                  <ion-badge color="light" item-end> {{order.vehicle | uppercase}} </ion-badge>
+                </ion-item>
+                <!--ACTION BUTTONS-->
+                <ion-item class="background-card" *ngIf="order.status == 'aceptada'" >
+                  <button item-end ion-button outline icon-start color="ee" (tap)="presentOrderCodePrompt(order.order_id)">
+                    INGRESAR CODIGO ENVIO
+                  </button>
+                </ion-item>
+                <ion-item class="background-card">
+                  <button item-end ion-button outline icon-start color="ee" (tap)="goMessages(order.business_id, 'delivery')">
+                    <ion-icon name="list"></ion-icon>
+                    MENSAJES
+                  </button>
+                </ion-item>
+                <ion-item class="background-card" *ngIf="order.status == 'en proceso'">
+                  <button item-end ion-button outline icon-start color="ee" (tap)="presentFinalOrderCodePrompt(order.order_id)">
+                    <ion-icon name="list"></ion-icon>
+                    INGRESAR CODIGO ENTREGA
+                  </button>
+                </ion-item>
+                <ion-item class="background-card">
+                  <button item-end ion-button outline icon-start color="ee" (tap)="goOrder(order.order_id, 'deliveries', 'tracking', order.business_id, order.status)">
+                    <ion-icon name="locate"></ion-icon>
+                    SEGUIMIENTO
+                  </button>
+                </ion-item>
+                <!--COST-->
+                <ion-item class="background-card">
+                    <ion-badge color="ee" item-end> {{order.cost | currency:'ARS'}}</ion-badge>
+                </ion-item>
+              </ion-card-content>                
+            </ion-card>
+        </ion-list>
+
+    </div>
+
+</ion-content>

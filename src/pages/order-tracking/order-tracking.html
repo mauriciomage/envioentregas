@@ -1,0 +1,77 @@
+<!--
+  Generated template for the OrderTrackingPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="ee">
+    <ion-title>{{title}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+	<ion-list-header>
+	    <p> Ofertas Propuestas - {{businesses[0].name}} </p>
+
+	    <p class="text-status">Desliza hacia la izq. para operar</p>
+	</ion-list-header>
+	<ion-list>
+		<ion-item-sliding #slidingItem *ngFor="let business of businesses">
+			<!-- Aca se cargaria de Orders -->
+		  <ion-item >
+
+		    <ion-avatar  item-end>
+		    	<img src="assets/imgs/profiles/{{business.photo}}">
+		    </ion-avatar>
+		    <!-- {{username <- user_id}} -->
+		    <p class="" item-end><ion-icon name="person"></ion-icon> {{business.username}} <br><h3 class="text-status">{{business.status | uppercase}}</h3></p>
+		    
+		    <!-- {{source, destination}} -->
+		    <p class="normal_text"><b class="text">Desde </b> {{business.source}} </p>	
+		    <p class="normal_text"><b class="text">Hasta </b> {{business.destination}} </p>
+
+		    <!-- {{vehiculo}} -->
+		    <p class="normal_text"> <b class="text">Vehículo </b><b>{{business.vehicle | uppercase}}</b> </p>
+		     <!-- {{weight}} -->
+		    <p class="normal_text"> <b class="text">Peso </b><b>{{business.weight}} g.</b> </p>
+		    <!-- {{finishDate}} -->
+		    
+		    <!-- {{finishDate}} -->
+		    <h2><p><ion-icon name="alarm"></ion-icon> <b class="text">{{business.date_proposal.split('-')[2]}}/{{business.date_proposal.split('-')[1]}}  </b></p></h2>
+		    <!--En que momento -->
+		    <p><ion-icon name="time"></ion-icon> <b class="text">{{business.momment_proposal}}  </b></p>
+		    <!-- {{cost}} -->
+ 		    <p class="normal_text"><b>$</b>{{business.cost_proposal}}</p>
+		    
+		</ion-item>
+
+		  	<ion-item-options *ngIf="business.status_order == 'en negociacion'; else actionsBlock" #actionsBlock>
+	      		<button ion-button color="green" (click)="presentAcceptOrder(business.name, business.cost_proposal, business.delivery_id, business.user_id, business.order_id, business.id)">Aceptar</button>
+	      		<button ion-button color="danger"(click)="presentCancelOrder(business.order_id, business.delivery_id, business.user_id, business.date_proposal, business.id)">Cancelar</button>
+	      		<button ion-button color="secondary"(click)="viewMessages()">Mensajes</button>
+	   		</ion-item-options>
+
+   		</ion-item-sliding>	
+	</ion-list>
+	<!-- Aca se cargarian las operaciones en Businesses-->
+  	<ion-list style="display:none">
+  		<ion-item *ngFor="let business of businesses">
+			<h2><b>{{business.username}}</b></h2>
+			<p class="normal_text">Día y Hora Delivery</p>
+		    <p class=""><b>{{business.date_proposal}}</b></p>
+		    <!-- {{Costo propuesto || Costo a pagar }} debe ser segun quien reporte  -->
+		    <p class="normal_text">Costo propuesto: <b>$ {{business.cost_proposal}}</b></p>
+		    
+		    <p class="" item-end>
+		    	<i>Actualizado día:</i><br>
+		    	<i>{{business.created_at}}</i>
+				<br>
+		    	{{business.status}}
+			</p>
+		</ion-item>
+  	</ion-list>
+</ion-content>

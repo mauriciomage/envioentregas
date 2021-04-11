@@ -1,0 +1,183 @@
+<ion-header>
+
+  <ion-navbar color="ee" hideBackButton>
+    <ion-buttons left>
+      <button class="cross-btn" (click)="close()">
+        <h2 class="cross-header">X</h2>
+      </button>
+    </ion-buttons>
+  	<ion-title>{{title}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="background">
+
+  	<div id="map-order">
+    </div>
+   
+    <ion-list-header class="background-item" text-wrap *ngIf="offerts.length > 0">
+      DESLIZA A LA IZQUIERDA PARA RESPONDER.
+    </ion-list-header>
+
+    <ion-list  class="background-item" >
+      <ion-item-sliding #slidingItem *ngFor="let offert of offerts" >
+        <ion-item text-wrap class="background-item">
+          <ion-avatar item-start *ngIf="offert.photo">
+            <img src="https://envioentregas.com/storage/app/public/users/{{offert.photo}}">
+          </ion-avatar>
+          <ion-avatar item-start *ngIf="!offert.photo"> 
+            <img src="assets/imgs/user_default.png">
+          </ion-avatar>
+        
+          <h2 class="name-text">{{offert.fname | uppercase}} {{offert.lname | uppercase}}</h2>
+          <div>
+             <ion-icon *ngIf="offert.avg_point >= 1" color="ee" name="star"></ion-icon>
+             <ion-icon *ngIf="offert.avg_point > 0 && offert.avg_point < 1" color="ee" name="star-half"></ion-icon>
+             <ion-icon *ngIf="offert.avg_point < 1"  color="ee" name="star-outline"></ion-icon>
+
+             <ion-icon *ngIf="offert.avg_point >= 2" color="ee" name="star"></ion-icon>
+             <ion-icon *ngIf="offert.avg_point > 1 && offert.avg_point < 2" color="ee" name="star-half"></ion-icon>
+             <ion-icon *ngIf="offert.avg_point <= 1" color="ee" name="star-outline"></ion-icon>
+
+             <ion-icon *ngIf="offert.avg_point >= 3" color="ee" name="star"></ion-icon>
+             <ion-icon *ngIf="offert.avg_point > 2 && offert.avg_point < 3" color="ee" name="star-half"></ion-icon>
+             <ion-icon *ngIf="offert.avg_point <= 2" color="ee" name="star-outline"></ion-icon>
+
+             <ion-icon *ngIf="offert.avg_point >= 4" color="ee" name="star"></ion-icon>
+             <ion-icon *ngIf="offert.avg_point > 3 && offert.avg_point < 4" color="ee" name="star-half"></ion-icon>
+             <ion-icon *ngIf="offert.avg_point <= 3" color="ee" name="star-outline"></ion-icon>
+
+             <ion-icon *ngIf="offert.avg_point == 5" color="ee" name="star"></ion-icon>
+             <ion-icon *ngIf="offert.avg_point > 4 && offert.avg_point < 5" color="ee" name="star-half"></ion-icon>
+             <ion-icon *ngIf="offert.avg_point <= 4" color="ee" name="star-outline"></ion-icon>
+
+           </div>
+          
+          <p class="subtitle-card"><b>{{offert.date_proposal.split('-')[2]}}-{{offert.date_proposal.split('-')[1]}}</b>
+          <p class="subtitle-card"><b>Por la {{offert.momment_proposal}}</b></p>
+          <p class="subtitle-card"><b>{{offert.vehicle | uppercase}}</b></p>
+          <button ion-button clear item-end color="light">COBRA $ {{offert.cost_proposal | currency:'ARS'}} </button>
+
+        </ion-item>
+
+          <ion-item-options side="right" >
+              
+              <button ion-button color="ee" (click)="presentAcceptOrder(offert.name, offert.cost_proposal, offert.report_by, offert.user_id, offert.order_id, offert.id)">
+                Aceptar
+              </button>
+              <button ion-button color="danger" (click)="presentDeclineOffert(offert.report_by, offert.user_id, offert.order_id, offert.id)">
+                Rechazar
+              </button>
+              <button ion-button color="green"(click)="goMessages(offert.business_id, 'order')">
+                Mensajes
+              </button>
+          
+          </ion-item-options>
+
+      </ion-item-sliding>
+      
+    </ion-list>
+    
+    <p  *ngIf="business_delivery.length > 0" class="title-item"> DELIVERY </p>
+    <ion-list class="background-item" no-line *ngIf="business_delivery.length > 0">
+      <ion-item class="background-item">
+          <ion-avatar item-start>
+            <img src="https://envioentregas.com/storage/app/public/users/{{delivery_photo}}" *ngIf="delivery_photo">
+            <img src="assets/imgs/user_default.png" *ngIf="!delivery_photo">
+          </ion-avatar>
+          <label class="username-text" item-end>{{delivery_fname | uppercase}} {{delivery_lname | uppercase}}</label>
+      </ion-item>
+    </ion-list>
+
+
+    <ion-list class="background-item" *ngIf="tracking.length > 0">
+        <ion-item class="background-item" text-wrap *ngFor="let register of tracking">
+          <p class="subtitle-card" text-left><i> {{register.created_at}}</i></p>
+          <button ion-button color="yellow" clear *ngIf="register.status !== 'oferta rechazada'" item-end><b>{{register.status | uppercase}}</b></button>
+          <button ion-button color="yellow" (click)="presentDeliveryConfirm('1');" *ngIf="register.status == 'oferta rechazada' && register.re_offert == '0' && FROM_DELIVERIES" light item-end><b>{{register.status | uppercase}}</b></button>
+          <button ion-button color="yellow" (click)="presentDeliveryConfirm('1');" *ngIf="register.status == 'oferta rechazada' && register.re_offert == '1' && FROM_DELIVERIES" light item-end><b>{{register.status | uppercase}}</b></button>
+          <button ion-button color="yellow" disabled *ngIf="register.status == 'oferta rechazada' && register.re_offert == '0' && !FROM_DELIVERIES" light item-end><b>{{register.status | uppercase}}</b></button>
+          <button ion-button color="yellow" disabled *ngIf="register.status == 'oferta rechazada' && register.re_offert == '1' && !FROM_DELIVERIES" light item-end><b>{{register.status | uppercase}}</b></button>
+        </ion-item>
+    </ion-list>
+    <!-- NEW ORDER CARD-->
+    <ion-card *ngIf="id_order" class="background-card">
+      <ion-card-content>
+        <!--ORDER NAME-->
+        <p class="title-card">
+            {{name | uppercase}}
+        </p>
+        <!--DETAILS  -->
+          <p class="detail-text" *ngIf="description">
+            <i>Detalle: {{description}}</i>
+          </p>
+          <p class="subtitle-delivery-card" color="ee">
+            Por {{fname | uppercase}} {{lname | uppercase}}
+          </p>
+        <!--STATUS-->
+        <div class="status-container">
+          <ion-icon name="options"></ion-icon> <label class="status-text">{{status | uppercase}}</label>
+        </div>
+        <!--FROM TO-->
+        <div class="row">
+          <div class="col source-text">
+            {{source.split(',')[0] | uppercase}}
+          </div>
+          <div class="col">
+              <ion-icon class="icon-address" name="arrow-round-forward"></ion-icon>
+          </div>
+          <div class="col destination-text">
+            {{destination.split(',')[0] | uppercase}}
+          </div>
+        </div>
+        <!-- DAY-->
+        <ion-item class="background-card">
+          <p class="subtitle-card">
+            DIA
+          </p>  
+          <ion-badge color="light" item-end> {{maxDeliveryDate | date}}</ion-badge>
+        </ion-item>
+        <!--HOUR-->
+        <ion-item class="background-card">
+          <p class="subtitle-card">
+            HORA
+          </p>  
+            <ion-badge color="light" item-end> POR LA {{mommentPickup | uppercase}}</ion-badge>
+        </ion-item>
+        <!--TRANSPORT-->
+        <ion-item class="background-card">
+          <p class="subtitle-card">
+            TRANSPORTE
+          </p>  
+          <ion-badge color="light" item-end> {{vehicle | uppercase}} </ion-badge>
+        </ion-item>
+        <!--COST-->
+        <ion-item class="background-card">
+            <ion-badge color="ee" item-end> {{cost | currency:'ARS'}}</ion-badge>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+</ion-content>
+
+  <ion-footer no-shadow>
+    <button ion-button full (click)='presentDeliveryConfirm();' *ngIf="(status == 'cargada' || status == 'en negociacion') && (from_list_orders !== 'orders' && from_list_orders !== 'deliveries' && search_order == true) && !order_created && !orderFromClient" color="green" id="btn-make-offert">
+        REALIZAR UNA OFERTA
+    </button>
+    <button ion-button full (click)='presentDeliveryClientConfirm();' *ngIf="(status == 'cargada' || status == 'en negociacion') && (from_list_orders !== 'orders' && from_list_orders !== 'deliveries' && search_order == true) && !order_created && orderFromClient" color="green" id="btn-make-offert">
+      LLEVAR PEDIDO
+    </button>
+    
+    <button ion-button full (click)='presentLocalization(username);' *ngIf="(statusbusiness == 'en proceso' || statusbusiness == 'en camino') && from_list_orders == 'deliveries';" color="dark">ENVIAR UBICACION ACTUAL</button>
+    <button ion-button full *ngIf="(statusbusiness == 'aceptada' && from_list_orders == 'deliveries'); else actionsBlock" #actionsBlock (click)="presentOrderCodePrompt();"   class="footer-ee">INGRESAR CODIGO</button>
+    <button ion-button full *ngIf="(statusbusiness == 'en proceso' && from_list_orders == 'deliveries'); else actionsBlock" #actionsBlock (click)="presentFinalOrderCodePrompt();"   class="footer-ee">FINALIZAR ENVIO</button>
+       
+    <button ion-button full (click)="presentRatingPrompt();"  *ngIf="statusbusiness == 'completada' && FROM_DELIVERIES == true" class="footer-ee">CALIFICAR A {{fname}}</button>
+    <button ion-button full (click)="presentRatingDeliveryPrompt();"  *ngIf="statusbusiness == 'completada' && FROM_ORDERS == true" class="footer-ee">CALIFICAR A {{fname}}</button>
+
+
+    <button ion-button full (click)="presentCancelMessagePrompt(maxDeliveryDate);"  *ngIf="(statusbusiness == 'cargada' || statusbusiness == 'aceptada' || statusbusiness == 'en negociacion')  && (from_list_orders == 'orders');" color="danger">CANCELAR PEDIDO</button>
+
+  </ion-footer>

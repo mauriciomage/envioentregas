@@ -1,0 +1,85 @@
+<ion-header>
+
+  <ion-navbar color="ee">
+    <ion-title>{{title}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="background">
+
+  <div *ngIf="empty_messages && status_order !== 'cargada'">
+    <p>
+      <i>
+      Comunicate con el Delivery de tu Pedido..  
+      </i>
+    </p>  
+  </div>
+
+  <div *ngIf="status_order == 'cargada'">
+    <p>
+      <i>
+      Aún no se interesaron en tu Pedido..
+      </i>
+    </p>  
+  </div>
+  
+
+<div class="chatBubble" *ngFor="let message of messages;">
+
+  <!-- report_by in -->
+  <div class="chat-bubble left" *ngIf="iduser != message.report_by">
+    <span class="messenger" *ngIf="iduser != message.report_by">
+      <u>{{message.fname}} {{message.lname}}</u>
+    </span>
+    <br/>
+    <div class="message" *ngIf="iduser != message.report_by">{{message.messages}}</div>
+    <div class="message-detail" *ngIf="iduser != message.report_by">
+        <span *ngIf="iduser != message.report_by" class="date-message">{{message.date_message}}</span>
+    </div>
+  </div>
+  <!-- report_by out -->
+  <div class="chat-bubble right" *ngIf="iduser == message.report_by">
+    <span class="messenger" *ngIf="iduser == message.report_by">
+      <u>{{message.fname | uppercase}} {{message.lname | uppercase}} </u>
+    </span>
+    <br/>
+    <div class="message" *ngIf="iduser == message.report_by">{{message.messages}}</div>
+    <div class="message-detail" *ngIf="iduser == message.report_by">
+        <span *ngIf="iduser == message.report_by" class="date-message">{{message.date_message}}</span>
+    </div>
+  </div>
+
+  <hr>
+</div>
+
+</ion-content>
+<ion-footer id="btn-new-message" *ngIf="status_order !== 'cargada'">
+  <ion-item>
+
+    <ion-textarea 
+      [(ngModel)]="message"
+      class="textarea-message"
+      placeholder="Escribe algo..."
+      maxlength="90"
+      ngModel>
+    </ion-textarea>
+
+    <span item-right class="max-char">max 90</span>
+    <ion-icon *ngIf="action === 'delivery'"
+      class="icon-ee"
+      name="send"
+      (click)="newMessages(idbusiness, 'deliveries');" 
+      item-right>
+    </ion-icon>
+
+    <ion-icon *ngIf="action === 'order'"
+      class="icon-ee"
+      name="send"
+      (click)="newMessages(idbusiness, 'orders');" 
+      item-right>
+    </ion-icon>
+  
+  </ion-item> 
+</ion-footer>

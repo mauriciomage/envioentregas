@@ -1,0 +1,30 @@
+<ion-header>
+
+    <ion-navbar color="dark">
+         <ion-title>{{ title | uppercase}}</ion-title>
+         <ion-buttons end>
+            <button ion-button icon-only (click)="closeModal()">
+                <ion-icon item-right ios="ios-close-outline" md="md-close"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+  
+  <ion-content class="background">
+    
+    <ion-list>
+        <ion-item-sliding *ngFor="let day of days; let k = index" color="dark"> 
+            
+            <ion-item color="dark" (click)="presentHoursDay(day)">
+                <h2><b>{{day.day | uppercase}}</b></h2>
+                <p ion-text color="light" *ngIf="day.status == '1'">Desde: <b>{{day.hour_start}}</b> Hasta: <b>{{day.hour_finish}}</b></p>
+                <p ion-text color="danger" *ngIf="day.status == '0'"><b>NO AGENDADO</b></p>    
+            </ion-item>
+            <ion-item-options color="dark" *ngIf="day.status == '1'" (ionSwipe)="hoursDayDelete(day.id)">
+                <button ion-button expandable color="danger"(click)="hoursDayDelete(day.id)">Desactivar</button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+
+  </ion-content>
+ 

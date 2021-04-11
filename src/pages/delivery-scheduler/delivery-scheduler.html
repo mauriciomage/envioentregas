@@ -1,0 +1,47 @@
+<ion-header>
+
+  <ion-navbar color="ee">
+  	 <ion-title>{{title | uppercase}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content class="background">
+		<ion-card class="background-card">
+
+		<ion-card-header class="background-card">
+			¿ Como indicar la Disponibilidad ?
+		</ion-card-header>
+		
+		<ion-card-content>
+			<h2 class="color-header-body">
+				Agrega y configura las ciudades en la que estás disponible.
+				Asigna los días y el horario en cada una de ellas.
+			</h2> 
+		</ion-card-content>
+		
+		</ion-card>
+		<ion-card class="background-card position-card" *ngIf="empty_scheduler">
+			<ion-card-header class="background-card center">
+				SIN CIUDADES AGREGADAS
+			</ion-card-header>
+			<ion-card-content class="center">
+			</ion-card-content>
+		</ion-card>
+	<ion-list color="dark">
+		<ion-item-sliding *ngFor="let scheduler of schedulers; let k = index"> 
+			<ion-item item-start color="dark" (click)="showSchedulerDays(scheduler.id)" detail-push> 
+				<h2><b>{{scheduler.city | uppercase}}</b></h2>
+				<p class="text-date" text-left><i>{{scheduler.updated_at}}</i></p>
+			</ion-item>
+			<ion-item-options color="dark" (ionSwipe)="presentDeliveryDelete(scheduler.city, scheduler.id)">
+					<button ion-button expandable (click)="presentDeliveryDelete(scheduler.city, scheduler.id)" color="danger">Eliminar</button>
+			</ion-item-options>
+		</ion-item-sliding>
+	</ion-list>
+</ion-content>
+<ion-footer>
+	<button class="bottom" ion-button full color="ee" (click)="addNew();">
+		AGREGAR CIUDAD
+	</button>
+</ion-footer>

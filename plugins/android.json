@@ -1,0 +1,80 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-advanced-http": {
+      "OKHTTP_VERSION": "3.10.0",
+      "PACKAGE_NAME": "com.envioentregas.app"
+    },
+    "cordova-plugin-calendar": {
+      "PACKAGE_NAME": "com.envioentregas.app"
+    },
+    "cordova-plugin-camera": {
+      "ANDROID_SUPPORT_V4_VERSION": "27.+",
+      "PACKAGE_NAME": "com.envioentregas.app"
+    },
+    "cordova-plugin-camera-preview": {
+      "PACKAGE_NAME": "com.envioentregas.app"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.envioentregas.app"
+    },
+    "cordova-plugin-facebook4": {
+      "APP_ID": "2011009715822964",
+      "APP_NAME": "EnvioEntregasApp",
+      "PACKAGE_NAME": "com.envioentregas.app"
+    },
+    "cordova-plugin-fcm-with-dependecy-updated": {
+      "PACKAGE_NAME": "com.envioentregas.app"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.envioentregas.app"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "com.envioentregas.app"
+    },
+    "cordova-plugin-ionic-keyboard": {
+      "PACKAGE_NAME": "com.envioentregas.app"
+    },
+    "cordova-plugin-ionic-webview": {
+      "PACKAGE_NAME": "com.envioentregas.app"
+    },
+    "cordova-plugin-nativegeocoder": {
+      "PACKAGE_NAME": "com.envioentregas.app"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "com.envioentregas.app"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.envioentregas.app"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.envioentregas.app"
+    },
+    "ionic-plugin-deeplinks": {
+      "URL_SCHEME": "envioentregas",
+      "DEEPLINK_SCHEME": "https",
+      "DEEPLINK_HOST": "envioentregas.com",
+      "ANDROID_PATH_PREFIX": "/",
+      "ANDROID_2_PATH_PREFIX": "/",
+      "ANDROID_3_PATH_PREFIX": "/",
+      "ANDROID_4_PATH_PREFIX": "/",
+      "ANDROID_5_PATH_PREFIX": "/",
+      "DEEPLINK_2_SCHEME": " ",
+      "DEEPLINK_2_HOST": " ",
+      "DEEPLINK_3_SCHEME": " ",
+      "DEEPLINK_3_HOST": " ",
+      "DEEPLINK_4_SCHEME": " ",
+      "DEEPLINK_4_HOST": " ",
+      "DEEPLINK_5_SCHEME": " ",
+      "DEEPLINK_5_HOST": " ",
+      "PACKAGE_NAME": "com.envioentregas.app"
+    }
+  },
+  "dependent_plugins": {}
+}

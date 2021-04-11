@@ -1,0 +1,16 @@
+page-view-image {
+	.image-modal {
+	  width: 100% !important;
+	  height: 100%;
+	  top: 0 !important;
+	  left: 0 !important;
+	}
+
+	.background {
+		background-image: url('../assets/imgs/new-order/back_minimal1.jpg');
+		background-size: 100% 100% !important;
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+	}
+}

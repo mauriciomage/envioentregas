@@ -1,0 +1,32 @@
+<ion-content class="background">
+	<form #frmPreDelivery="ngForm" >
+		<ion-card>
+		  <ion-card-header>
+		    Se un Delivery constante
+		  </ion-card-header>
+
+		  <ion-card-content>
+		    <ion-list no-line>
+			    <ion-item>
+			    	<ion-input type="text" name="email" placeholder="indica el email de tu usuario" ngModel #email = "ngModel"></ion-input>
+			    </ion-item>
+			</ion-list>
+		    <a>Olvidaste tu cuenta? <b>Obten ayuda para ingresar</b></a>
+
+		    <button ion-button block outline color="light" (click)='checkUser(frmPreDelivery);'>
+		    	Aceptar
+		    </button>
+
+		  	<p>o</p>
+
+		  	<button ion-button block color="facebook" (click)='loginWithFB()'>
+		  		<ion-icon name="logo-facebook"></ion-icon> &nbsp; Continuar con Facebook
+		  	</button>
+
+		  </ion-card-content>
+			<button class="bottom" ion-button clear full color="light" [navPush]="SigninPage">
+				No tienes cuenta? Registrate
+			</button>
+		</ion-card>
+	</form>
+</ion-content>

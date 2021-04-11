@@ -1,0 +1,26 @@
+<ion-header>
+    <ion-navbar color="dark">
+         <ion-buttons end>
+            <button ion-button icon-only (click)="closeModal()">
+                <ion-icon item-right ios="ios-close-outline" md="md-close"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+  
+  <ion-content class="background">
+    <img src="assets/imgs/icon.png" class="logo">
+    <br>
+    <h3 class="text-body" *ngIf="!isClient">
+        Ya perteneces a EnvioEntregas, <br>
+        Aprovechá, haz dinero extra. <br>
+        Carga tu Disponibiliad <br>
+        Y lleva Pedidos diarios que mas puedas!
+    </h3>
+    <h3 class="text-body" *ngIf="isClient">
+        Ya perteneces a EnvioEntregas, <br>
+        Publica Pedidos de tu Local. <br>
+        Y un Delivery lo llevara a Destino!
+    </h3>
+  </ion-content>
+ 

@@ -1,0 +1,38 @@
+page-landing {
+	.card-background-page {
+	  background-color: #f0f0f0;
+	  ion-card {
+	    position: relative;
+	    text-align: center;
+	  }
+
+	  .card-title {
+	    position: absolute;
+	    top: 50%;
+	    font-size: 1.2em;
+	    font-family: Tahoma, Geneva, sans-serif;
+	    width: 100%;
+	    font-weight: bold;
+	    color: #fff;
+	  }
+	  .button-ee{
+	  	background-color: #cc0000;
+	  	font-family: Tahoma, Geneva, sans-serif;
+
+	  }
+
+	  .card-subtitle {
+	    font-size: 1.0em;
+	    position: absolute;
+	    top: 75%;
+	    width: 100%;
+	    color: #cc0000;
+	  }
+
+	}
+	.button-ee{
+	  	background-color: #cc0000;
+	  	font-family: Tahoma, Geneva, sans-serif;
+
+	  }
+}

@@ -1,0 +1,91 @@
+page-messages {
+	.background{
+		background-color: map-get($colors, dark);
+  }
+
+  .title-list {
+    color: white;
+    size: 20px;
+  }
+
+  .background-card {
+    background-color: map-get($colors, dark-light);
+    color: #FAC82C;
+    size: 20px;
+  }
+
+  .title-card {
+    font-size: 16px;
+    text-align: center;
+    font-weight: lighter;
+    color: map-get($colors, light);
+  }
+
+  .subtitle-card {
+    font-size: 15px;
+    text-align: center;
+    color: map-get($colors, light);
+  }
+
+  .detail-text {
+    text-align: center;
+    color: gray;
+    font-size: 12px;
+  }
+
+  .subtitle-delivery-card {
+    font-size: 12px;
+    text-align: center;
+    color: map-get($colors, light);
+  }
+
+  .source-text {
+    text-align: left;
+    font-weight: bold;
+    font-size: 12px;
+  }
+  
+  .destination-text {
+    text-align: right;
+    font-weight: bold;
+    font-size: 12px;
+  }
+
+  .icon-address {
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  .status-container {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  ion-card {
+    text-align: center;
+    margin-top: 2cm;
+    background-color: darkgrey;
+  }
+  .card-title {
+    position: absolute;
+    top: 52%;
+    font-size: 2.0em;
+    width: 100%;
+    
+    color: #060606;
+    
+  }
+  .card-subtitle {
+    font-size: 1.0em;
+    position: absolute;
+    top: 52%;
+    width: 100%;
+    color: #000;
+  }
+  .status-text {
+    color:white;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+  }
+}

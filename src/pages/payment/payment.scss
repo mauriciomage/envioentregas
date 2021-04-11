@@ -1,0 +1,143 @@
+page-payment {
+	.text{
+	  color: #cc0000;
+	  font-family: Tahoma, Geneva, sans-serif;
+	  font-size: 1.2em;
+	}
+
+	// .text{
+	//   color: #26a69a;
+	//   font-family: Lato, Helvetica, sans-serif;
+	//   font-size: 0.8em;
+	// }
+	.normal_text{
+	  font-family: Lato, Helvetica, sans-serif;
+	  font-size: 15px;
+		color: #f9f0f0;
+	}
+	.text_header{
+	  color: #444;
+	  font-family: Lato, Helvetica, sans-serif;
+	  font-size: 1.0em;
+	  position:relative;
+	}
+	.text-status{
+	color: green;
+	font-weight: bold;
+	}
+	.button-ee{
+  	background-color: #444;
+  	color: #26a69a;
+  	font-family: Lato, Helvetica, sans-serif;
+
+  	}
+  	.ee-icon{
+  		color: #26a69a;
+  	}
+  	.img-order{
+  	  display: block;
+	  max-width:180px;
+	  max-height:75	px;
+	  width: auto;
+	  height: auto;
+  	}
+		.background{
+			background-image: url('../assets/imgs/new-order/back_minimal1.jpg');
+			background-size: 100% 100% !important;
+			background-position: center center;
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+		}
+
+		.text-header{
+		color:#fff;
+		font-family: Lato, Helvetica, sans-serif;
+		}
+		.text-header-ee{
+			color:#26a69a;
+			font-family: Lato, Helvetica, sans-serif;
+
+		}
+		.item{
+				margin-bottom: 10px;
+				background: rgba(0, 0, 0, 0.5);
+				border: medium;
+				border-color: #fff;
+
+				.text-input, {
+						color: #fff;
+						font-family: Lato, Helvetica, sans-serif;
+				}
+
+
+				input::-moz-placeholder {
+						color: #fff!important;
+						font-family: Lato, Helvetica, sans-serif;
+						font-style: italic;
+				}
+
+				input:-moz-placeholder {
+						color: #fff!important;
+						font-family: Lato, Helvetica, sans-serif;
+						font-style: italic;
+				}
+
+				*::-webkit-input-placeholder{
+						color: #fff!important;
+						font-family: Lato, Helvetica, sans-serif;
+						font-style: italic;
+				}
+
+				*:-ms-input-placeholder {
+						color: #fff!important;
+						font-family: Lato, Helvetica, sans-serif;
+				}
+
+				*:-moz-placeholder {
+						color: #fff!important;
+						font-family: Lato, Helvetica, sans-serif;
+				}
+		}
+		.scroll-content{
+	 //       align-content: center;
+	 //       display: flex;
+	 //       flex-direction: column;
+	 //       justify-content: center;
+					text-align: center;
+		 }
+		 ion-card.card{
+				 box-shadow: none;
+				 background: rgba(0, 0, 0, 0.5);
+				 border-radius: 5px;
+
+		 }
+		 a, p, b,
+		 ion-card-header.card-header{
+				 color: #fff;
+				 font-size: 17px;
+				 text-align: center;
+				 font-family: Lato, Helvetica, sans-serif;
+		 }
+		 .text-large{
+		 	color: #fff;
+		 	font-family: Lato, Helvetica, sans-serif;
+		 }
+		 i,
+		 ion-card-content.card-header{
+				 color: #26a69a;
+				 font-size: 17px;
+				 text-align: center;
+				 font-family: Lato, Helvetica, sans-serif;
+		 }
+		 ion-icon{
+			 font-color: #EEEEEE;
+		 }
+
+		 .list > .item-block:first-child {
+				 border: medium none;
+		 }
+		 .item-weight{
+			 margin-bottom: 10px;
+				 background: rgba(255, 255, 255, 0.5);
+		 }
+}
